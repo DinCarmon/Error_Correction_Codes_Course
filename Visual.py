@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 
 
-class Visual():
+class Visual:
     def print_simple(self):
         # x axis values
         x = [1, 2, 3]

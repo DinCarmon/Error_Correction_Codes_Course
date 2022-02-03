@@ -1,1 +1,1 @@
-class Compute():
+class Compute:
