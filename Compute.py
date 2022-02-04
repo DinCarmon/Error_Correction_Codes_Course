@@ -46,5 +46,5 @@ def create_bound(bound_type_req, q_req):
     delta_arr = np.arange(1.0 / Config.n, 1, Config.res)
     bound = getattr(Bounds.bounds_inst, bound_type_req)
     graph_arr = [bound(Config.n, delta, q_req)[0] for delta in delta_arr]
-    name_arr = bound(Config.n, delta_arr[0], Config.q)[1]
+    name_arr = bound(Config.n, delta_arr[0], q_req)[1]
     return [bound_type_req, q_req, delta_arr, graph_arr, name_arr]

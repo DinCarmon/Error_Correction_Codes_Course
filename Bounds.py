@@ -8,9 +8,18 @@ class Bounds:
         inner_sum = 0.0
         d = delta * n
         for i in range(0, math.floor((d-1)/2) + 1, 1):
-            inner_sum += Compute.ncr(n, i) * math.pow(q-1, i)
+            try:
+                inner_sum += Compute.ncr(n, i) * math.pow(q-1, i)
+            except OverflowError:
+                print("overflow in computation. exits")
+                exit()
+        if inner_sum == float("inf") or inner_sum == float("inf"):
+            print("overflow in computation. exits")
+            exit()
         k = n - math.log(inner_sum, q)
         rate = k / n
+        if (delta >= 0.7):
+            delta = delta * 1
         return rate, "Hamming Bound, q = " + str(q)
 
     def gilbert_vershamov_bound(self, n, delta, q):

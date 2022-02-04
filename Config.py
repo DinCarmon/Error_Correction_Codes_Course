@@ -1,9 +1,9 @@
 # steps in plot
 global res
-res = 0.001
+res = 0.01
 
 global n
-n = 100
+n = 500
 
 global q
 q = 2
