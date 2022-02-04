@@ -1,5 +1,6 @@
 # importing the required module
 import matplotlib.pyplot as plt
+import matplotlib
 import numpy as np
 import Config
 import Bounds
@@ -21,7 +22,7 @@ class Visual:
         # function to show the plot
         plt.show()
 
-    def print_elaborate(self, x_arr, y_arr):
+    def print_elaborate(self, x_arr, y_arr, legend_array=None):
         for gra in y_arr:
             plt.plot(x_arr, gra)
         # Naming the x-axis, y-axis and the whole graph
@@ -29,17 +30,24 @@ class Visual:
         plt.ylabel("Rate")
         plt.title("Rate To Delta Bounds")
         # Adding legend, which helps us recognize the curve according to it's color
-        plt.legend()
+        plt.legend(legend_array)
         # To load the display window
         plt.show()
 
-    def calculate_delta_to_rate_plot(self):
-        # delta axis values
-        delta_arr = np.arange(1.0 / Config.n, 1, Config.res)
-        graph_arr = [None] * len(Bounds.bounds_inst.bound_arr)
-        for i in range(0, len(Bounds.bounds_inst.bound_arr)):
-            bound = Bounds.bounds_inst.bound_arr[i]
-            graph_arr[i] = [bound(Bounds.bounds_inst, Config.n, delta, Config.q) for delta in delta_arr]
-        return delta_arr, graph_arr
+    def fig_elaborate(self, x_arr, y_arr, legend_array=None):
+        fig = matplotlib.figure.Figure(figsize=(8, 4), dpi=100)
+        plt_inst = fig.add_subplot(111,
+                                   xlabel = "Delta",
+                                   ylabel = "Rate",
+                                   title = "Rate To Delta Bounds")
+        for gra in y_arr:
+            plt_inst.plot(x_arr, gra)
+        # Adding legend, which helps us recognize the curve according to it's color
+        fig.legend(legend_array,
+                   shadow = True)
+        return fig
+
+
+vis_inst = Visual()
 
 

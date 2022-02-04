@@ -11,17 +11,19 @@ class Bounds:
             inner_sum += Compute.ncr(n, i) * math.pow(q-1, i)
         k = n - math.log(inner_sum, q)
         rate = k / n
-        return rate
+        return rate, "Hamming Bound, q = " + str(q)
 
     def gilbert_vershamov_bound(self, n, delta, q):
-        Rate = 1 - entropy(q, delta)
-        return Rate
+        rate = None
+        if delta < 1 - (1 / q):
+            rate = 1 - Compute.entropy(q, delta)
+        return rate, "Gilbert Vershamov Bound, q = " + str(q)
 
     def singleton_bound(self, n, delta, q):
         d = delta * n
         k = n - d + 1
         rate = k / n
-        return rate
+        return rate, "Singleton Bound, q = " + str(q)
 
     def plotkin_bound(self, n, delta, q):
         plotkin_divider = (1 - 1 / q) * n
@@ -41,12 +43,18 @@ class Bounds:
                 rate = k / n
             else:
                 rate = 1 - (q / (q-1)) * delta
-        return rate
+        return rate, "Plotkin Bound, q = " + str(q)
 
     def elias_bassalygo_bound(self, n, delta, q):
-        rate = 1 - entropy(q, johnson(q, delta))
-        return rate
-    bound_arr = [generalized_hamming_bound]
+        rate = None
+        if delta <= (q-1) / q:
+            rate = 1 - Compute.entropy(q, Compute.johnson(q, delta))
+        return rate, "Elias-Bassalygo Bound, q = " + str(q)
+    bound_arr = [generalized_hamming_bound,
+                 gilbert_vershamov_bound,
+                 singleton_bound,
+                 plotkin_bound,
+                 elias_bassalygo_bound]
 
 
 global bounds_inst
