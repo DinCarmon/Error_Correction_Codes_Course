@@ -45,7 +45,7 @@ def gui_build():
     matplotlib.use("TkAgg")
 
     description_openning_text = "Welcome to the the visualiser. Enjoy!"
-    description_closing_text = "All rights reserved to Din Carmon but of course you can " \
+    description_closing_text = "Made by Din Carmon. You are welcome to " \
                                "change and imporve the code:"
 
 
